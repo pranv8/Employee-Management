@@ -36,7 +36,7 @@ const ADMIN_PASSWORD = 'Admin@123';
 export class AuthService {
   private readonly usersKey = 'users';
   private readonly sessionKey = 'session';
-  private readonly sessionTime = 10 * 60 * 1000;
+  private readonly sessionTime = 1 * 60 * 1000;
 
   private getUsers(): storedUser[] {
     try {

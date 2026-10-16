@@ -41,15 +41,20 @@
 
 
   <!-- Employee Table -->
-  <app-employee-table
-    [employees]="filteredEmployeeList"
-    [ageAscending]="isAgeAscending"
+  <app-custom-table
+    [rows]="filteredEmployeeList"
+    [columns]="employeeColumns"
+    rowKey="employeeId"
+    sortKey="employeeAge"
+    [sortAscending]="isAgeAscending"
     [canEdit]="canEdit"
     [canDelete]="canDelete"
+    emptyStateTitle="No employees found"
+    emptyStateMessage="Try changing your search."
     (edit)="openEditEmployeeForm($event)"
     (delete)="openDeleteConfirmation($event)"
-    (sortAge)="sortEmployeesByAge()"
-  ></app-employee-table>
+    (sort)="sortEmployeesByAge()"
+  ></app-custom-table>
 
 
   <!-- Add / Edit Employee Modal -->

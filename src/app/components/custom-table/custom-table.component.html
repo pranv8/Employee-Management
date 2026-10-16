@@ -1,0 +1,93 @@
+<section class="table-container">
+  <table>
+    <thead>
+      <tr>
+        @for (column of columns(); track column.key) {
+          <th [attr.data-column-key]="column.key">
+            @if (column.sortable) {
+              <button
+                class="sort-button"
+                type="button"
+                (click)="onSort(column)"
+              >
+                {{ column.label }}
+                @if (sortKey() === column.key) {
+                  <span>{{ sortAscending() ? '↑' : '↓' }}</span>
+                }
+              </button>
+            } @else {
+              {{ column.label }}
+            }
+          </th>
+        }
+
+        @if (canEdit() || canDelete()) {
+          <th class="actions-column">Actions</th>
+        }
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (row of rows(); track getCellValue(row, rowKey())) {
+        <tr>
+          @for (column of columns(); track column.key) {
+            <td [attr.data-column-key]="column.key">
+              @switch (column.displayType ?? 'text') {
+                @case ('badge') {
+                  <span class="department-badge">
+                    {{ getCellValue(row, column.key) }}
+                  </span>
+                }
+                @default {
+                  {{ getCellValue(row, column.key) }}
+                }
+              }
+            </td>
+          }
+
+          @if (canEdit() || canDelete()) {
+            <td class="actions-column">
+              <div class="action-buttons">
+                @if (canEdit()) {
+                  <app-button
+                    [button]="{
+                      label: 'Edit',
+                      type: 'button',
+                      disabled: false,
+                      className: 'edit-btn',
+                      icon: 'edit',
+                    }"
+                    (clicked)="edit.emit(row)"
+                  ></app-button>
+                }
+
+                @if (canDelete()) {
+                  <app-button
+                    [button]="{
+                      label: 'Delete',
+                      type: 'button',
+                      disabled: false,
+                      className: 'delete-btn',
+                      icon: 'delete',
+                    }"
+                    (clicked)="delete.emit(row)"
+                  ></app-button>
+                }
+              </div>
+            </td>
+          }
+        </tr>
+      } @empty {
+        <tr>
+          <td
+            [attr.colspan]="columns().length + (canEdit() || canDelete() ? 1 : 0)"
+            class="empty-message"
+          >
+            <h3>{{ emptyStateTitle() }}</h3>
+            <p>{{ emptyStateMessage() }}</p>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

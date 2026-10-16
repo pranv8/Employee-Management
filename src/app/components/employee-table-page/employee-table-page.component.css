@@ -16,7 +16,7 @@
   overflow: hidden;
 }
 
-app-employee-table {
+app-custom-table {
   display: block;
   min-height: 0;
   flex: 1;

@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnDestroy, effect } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  Signal,
+  computed,
+  signal,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import type { EChartsOption } from 'echarts';
 import * as echarts from 'echarts/core';
@@ -14,7 +20,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { Employee } from '../../interface/employee.interface';
 import { EmployeeService } from '../../services/employee.service';
 import { Theme, ThemeService } from '../../services/theme.service';
-import { ChartComponent } from './chart/chart.component';
+import {CustomChartComponent} from './custom-chart/custom-chart.component';
 
 interface DepartmentCount {
   name: string;
@@ -92,44 +98,45 @@ echarts.use([
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, ChartComponent],
+  imports: [CommonModule, CustomChartComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnDestroy {
-  public departments: DepartmentCount[] = [];
-  public ageGroups: AgeGroupCount[] = [];
-  public chartOptions: EChartsOption = {};
-  public ageChartOptions: EChartsOption = {};
-  public totalEmployees = 0;
-  public isLoading = true;
-  public errorMessage = '';
+  public readonly departments = signal<DepartmentCount[]>([]);
+  public readonly ageGroups = signal<AgeGroupCount[]>([]);
+  public readonly totalEmployees = signal(0);
+  public readonly isLoading = signal(true);
+  public readonly errorMessage = signal('');
+  public readonly chartOptions: Signal<EChartsOption>;
+  public readonly ageChartOptions: Signal<EChartsOption>;
 
   private readonly subscription: Subscription;
 
   public constructor(
     private readonly employeeService: EmployeeService,
     private readonly themeService: ThemeService,
-    private readonly changeDetectorRef: ChangeDetectorRef,
   ) {
-    effect(() => {
-      this.refreshChartOptions(this.themeService.theme());
-      this.changeDetectorRef.markForCheck();
-    });
+    this.chartOptions = computed(() =>
+      this.createBarChartOptions(this.departments(), this.themeService.theme()),
+    );
+    this.ageChartOptions = computed(() =>
+      this.createBarChartOptions(this.ageGroups(), this.themeService.theme()),
+    );
 
     this.subscription = this.employeeService.loadEmployees().subscribe({
       next: (employees: Employee[]) => {
-        this.totalEmployees = employees.length;
-        this.departments = this.groupByDepartment(employees);
-        this.ageGroups = this.groupByAgeGroup(employees);
-        this.refreshChartOptions(this.themeService.theme());
-        this.isLoading = false;
+        this.totalEmployees.set(employees.length);
+        this.departments.set(this.groupByDepartment(employees));
+        this.ageGroups.set(this.groupByAgeGroup(employees));
+        this.isLoading.set(false);
       },
       error: (error: unknown) => {
         console.error('Unable to load dashboard chart data:', error);
-        this.errorMessage =
-          'Employee data could not be loaded. Please try again.';
-        this.isLoading = false;
+        this.errorMessage.set(
+          'Employee data could not be loaded. Please try again.',
+        );
+        this.isLoading.set(false);
       },
     });
   }
@@ -167,11 +174,6 @@ export class DashboardComponent implements OnDestroy {
     }
 
     return counts;
-  }
-
-  private refreshChartOptions(theme: Theme): void {
-    this.chartOptions = this.createBarChartOptions(this.departments, theme);
-    this.ageChartOptions = this.createBarChartOptions(this.ageGroups, theme);
   }
 
   // Shared builder for every bar chart on the dashboard.

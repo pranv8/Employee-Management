@@ -1,5 +1,5 @@
 
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import type { EChartsOption } from 'echarts';
 import * as echarts from 'echarts/core';
 import { NgxEchartsDirective, provideEchartsCore } from 'ngx-echarts';
@@ -9,10 +9,10 @@ import { NgxEchartsDirective, provideEchartsCore } from 'ngx-echarts';
   standalone: true,
   imports: [NgxEchartsDirective],
   providers: [provideEchartsCore({ echarts })],
-  templateUrl: './chart.component.html',
-  styleUrl: './chart.component.css',
+  templateUrl: './custom-chart.component.html',
+  styleUrl: './custom-chart.component.css',
 })
-export class ChartComponent {
-  @Input({ required: true }) public options!: EChartsOption;
-  @Input() public ariaLabel = 'Chart';
+export class CustomChartComponent {
+  public readonly options = input.required<EChartsOption>();
+  public readonly ariaLabel = input('Chart');
 }

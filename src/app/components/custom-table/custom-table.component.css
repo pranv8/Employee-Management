@@ -22,37 +22,35 @@ table {
   width: 100%;
   min-width: 1100px;
   border-collapse: collapse;
-  table-layout: fixed;
+  table-layout: auto;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
 
-/* Column widths */
-
-th:nth-child(1) {
+th[data-column-key='employeeId'] {
   width: 8%;
 }
 
-th:nth-child(2) {
+th[data-column-key='employeeName'] {
   width: 18%;
 }
 
-th:nth-child(3) {
+th[data-column-key='employeeEmail'] {
   width: 27%;
 }
 
-th:nth-child(4) {
+th[data-column-key='employeeDepartment'] {
   width: 18%;
 }
 
-th:nth-child(5) {
+th[data-column-key='employeeAge'] {
   width: 9%;
 }
 
-th:nth-child(6) {
+th[data-column-key='employeePosition'] {
   width: 23%;
 }
 
-th:nth-child(7) {
+.actions-column {
   width: 14%;
 }
 
@@ -118,17 +116,24 @@ tbody tr:hover {
 
 /* Age sorting */
 
-.sortable {
+.sort-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  font: inherit;
   cursor: pointer;
   user-select: none;
 }
 
-.sortable:hover {
+.sort-button:hover {
   color: var(--action);
 }
 
-.sortable span {
-  margin-left: 4px;
+.sort-button span {
   font-size: 12px;
   color: var(--text-muted);
 }
@@ -139,16 +144,11 @@ tbody tr:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   padding: 5px 10px;
-  color: var(--text-secondary); /* same color as table text */
-
-  
-
+  color: var(--text-secondary);
   font-family: 'Inter', Arial, Helvetica, sans-serif;
-  font-size: 14px; /* same as table data */
-  font-weight: 400; /* same as normal table data */
-
+  font-size: 14px;
+  font-weight: 400;
   line-height: 1.5;
 }
 

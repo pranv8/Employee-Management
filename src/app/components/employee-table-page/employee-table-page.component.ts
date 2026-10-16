@@ -5,9 +5,10 @@ import { Router } from '@angular/router';
 import { EmployeeService } from '../../services/employee.service';
 import { AuthService } from '../../services/auth.service';
 import { Employee } from '../../interface/employee.interface';
+import { TableColumn } from '../../interface/table-column.inteface';
 import { ButtonComponent } from '../button/button.component';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
-import { EmployeeTableComponent } from '../employee-table/employee-table.component';
+import { CustomTableComponent } from '../custom-table/custom-table.component';
 import { ModalComponent } from '../modal/modal.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 
@@ -17,7 +18,7 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
   imports: [
     ButtonComponent,
     EmployeeFormComponent,
-    EmployeeTableComponent,
+    CustomTableComponent,
     ModalComponent,
     SearchBarComponent,
   ],
@@ -25,6 +26,19 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
   styleUrl: './employee-table-page.component.css',
 })
 export class EmployeeTablePageComponent {
+  public readonly employeeColumns: TableColumn[] = [
+    { key: 'employeeId', label: 'ID' },
+    { key: 'employeeName', label: 'Name' },
+    { key: 'employeeEmail', label: 'Email' },
+    {
+      key: 'employeeDepartment',
+      label: 'Department',
+      displayType: 'badge',
+    },
+    { key: 'employeeAge', label: 'Age', sortable: true },
+    { key: 'employeePosition', label: 'Position' },
+  ];
+
   public employeeList: Employee[] = [];
   public filteredEmployeeList: Employee[] = [];
   public employeeBeingEdited: Employee | null = null;
