@@ -1,0 +1,135 @@
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--bg-auth);
+}
+
+.login-panel {
+  width: 100%;
+  max-width: 420px;
+}
+
+.login-card {
+  width: 100%;
+  padding: 35px;
+  border-radius: 4px;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-lg);
+}
+
+.login-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.login-header h1 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 18x
+}
+
+.login-header p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--action);
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+.form-group input::placeholder {
+  color: var(--text-muted);
+}
+
+.error {
+  display: block;
+  margin-top: 6px;
+  color: var(--danger);
+  font-size: 13px;
+}
+
+.login-error {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 6px;
+  background: var(--danger-soft);
+  color: var(--danger);
+  font-size: 14px;
+}
+
+form > button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: var(--action);
+  color: var(--on-accent);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+form > button[type="submit"]:hover:not(:disabled) {
+  background: var(--action-strong);
+}
+
+form > button[type="submit"]:disabled {
+  background: var(--disabled-bg);
+  color: var(--disabled-text);
+  cursor: not-allowed;
+}
+
+.signup-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 20px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.link-button {
+  width: auto;
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--action);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.link-button:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 28px 22px;
+  }
+}

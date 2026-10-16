@@ -1,0 +1,67 @@
+<aside class="sidebar" [class.expanded]="isExpanded()">
+  <button
+    class="sidebar-toggle"
+    type="button"
+    [attr.aria-expanded]="isExpanded()"
+    [attr.aria-label]="isExpanded() ? 'Collapse sidebar' : 'Expand sidebar'"
+    (click)="toggleExpanded()"
+  >
+    <span aria-hidden="true">{{ isExpanded() ? '‹' : '›' }}</span>
+  </button>
+
+
+  <!-- Department Dashboard -->
+<a
+  routerLink="/employees/dashboard"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="{ exact: true }"
+  class="nav-item"
+  title="Department Dashboard"
+  aria-label="Department Dashboard"
+>
+  <svg
+    class="nav-icon"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <use href="assets/icons.svg#icon-department-chart"></use>
+  </svg>
+
+  <span class="nav-label">Department Chart</span>
+</a>
+  <nav class="navigation">
+
+    <!-- Employee Table -->
+    <a
+      routerLink="/employees/table"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="nav-item"
+      title="Employee Table"
+      aria-label="Employee Table"
+    >
+      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <use href="assets/icons.svg#icon-employee-table"></use>
+      </svg>
+      <span class="nav-label">Employee Table</span>
+    </a>
+
+    <!-- Employee List -->
+    <a
+      routerLink="/employees/list"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: false }"
+      class="nav-item"
+      title="Employee List"
+      aria-label="Employee List"
+    >
+      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <use href="assets/icons.svg#icon-employee-list"></use>
+      </svg>
+      <span class="nav-label">Employee List</span>
+    </a>
+
+  </nav>
+
+</aside>

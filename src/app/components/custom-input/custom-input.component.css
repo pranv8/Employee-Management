@@ -1,0 +1,84 @@
+:host {
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 17px;
+}
+
+.form-group.compact {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.required {
+  color: var(--danger);
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 15px;
+}
+
+.form-group input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--action);
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+.form-group input.ng-invalid.ng-touched,
+.form-group select.ng-invalid.ng-touched {
+  border-color: var(--danger);
+}
+
+.form-group input.show-valid.ng-valid.ng-touched,
+.form-group select.show-valid.ng-valid.ng-touched {
+  border-color: var(--success);
+}
+
+.form-group select option {
+  background: var(--bg-input);
+  color: var(--text-primary);
+}
+
+.error {
+  display: block;
+  margin-top: 6px;
+  color: var(--danger);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.hint {
+  display: block;
+  margin-top: 6px;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Search variant: compact bar with room for icon and clear button */
+.form-group.compact input {
+  height: 42px;
+  padding: 0 40px 0 16px;
+  font-size: 14px;
+  border-radius: 5px;
+}

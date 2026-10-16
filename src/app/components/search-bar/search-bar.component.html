@@ -1,0 +1,24 @@
+<div class="search-container" [formGroup]="searchForm">
+  <app-input-field
+    [field]="searchField()"
+    formControlName="search"
+  ></app-input-field>
+
+  <span class="search-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" focusable="false">
+      <use href="assets/icons.svg#icon-search"></use>
+    </svg>
+  </span>
+
+  @if (searchForm.controls.search.value) {
+    <button
+      type="button"
+      class="clear-search"
+      title="Clear search"
+      (click)="onClear()"
+    >
+      ×
+    </button>
+  }
+
+</div>

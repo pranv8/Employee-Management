@@ -1,0 +1,43 @@
+<section class="employee-directory">
+  <aside class="employee-list-panel" aria-label="Employee list">
+    <header class="list-header">
+      <h1>Employee List</h1>
+      <p>{{ employees.length }} employees</p>
+    </header>
+
+    <app-search-bar
+      class="list-search"
+      (search)="searchEmployees($event)"
+      (clear)="clearSearch()"
+    ></app-search-bar>
+
+    <ul class="employee-list">
+      @for (employee of visibleEmployees; track employee.employeeId) {
+        <li>
+          <button
+            type="button"
+            class="employee-list-item"
+            [class.selected]="selectedEmployee?.employeeId === employee.employeeId"
+            [attr.aria-current]="selectedEmployee?.employeeId === employee.employeeId ? 'true' : null"
+            (click)="selectEmployee(employee)"
+          >
+            <span class="employee-name">{{ employee.employeeName }}</span>
+            <span class="employee-id">ID: {{ employee.employeeId }}</span>
+          </button>
+        </li>
+      } @empty {
+        <li class="empty-list">
+          {{ searchQuery ? 'No employees match your search.' : 'No employees available.' }}
+        </li>
+      }
+    </ul>
+  </aside>
+
+  <main class="employee-details">
+    @if (employeeNotFound) {
+      <div class="not-found" role="status">The selected employee could not be found.</div>
+    } @else {
+      <app-employee-card [employee]="selectedEmployee"></app-employee-card>
+    }
+  </main>
+</section>

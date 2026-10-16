@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" font-family="Arial,Helvetica,sans-serif" font-size="13"><rect width="720" height="300" fill="#f5f7fb"/>
+<rect width="720" height="300" fill="#0f172a" opacity="0.5"/>
+<rect x="200" y="14" width="320" height="272" rx="6" fill="#fff"/>
+<text x="220" y="42" font-size="17" font-weight="bold" fill="#1e3a5f">Add Employee</text>
+<text x="220" y="60" fill="#64748b" font-size="12">Enter employee information below.</text>
+<g stroke="#cbd5e1" fill="#fff"><rect x="220" y="72" width="280" height="26" rx="4"/><rect x="220" y="106" width="280" height="26" rx="4"/><rect x="220" y="140" width="135" height="26" rx="4"/><rect x="365" y="140" width="135" height="26" rx="4"/><rect x="220" y="174" width="280" height="26" rx="4"/></g>
+<g fill="#64748b" font-size="12"><text x="230" y="90">Name</text><text x="230" y="124">Email</text><text x="230" y="158">Age</text><text x="375" y="158">Department</text><text x="230" y="192">Position</text></g>
+<rect x="340" y="226" width="75" height="30" rx="4" fill="#e5e7eb"/><text x="377" y="246" text-anchor="middle" fill="#374151">Cancel</text>
+<rect x="425" y="226" width="75" height="30" rx="4" fill="#007a8c"/><text x="462" y="246" text-anchor="middle" fill="#fff">Save</text>
+</svg>

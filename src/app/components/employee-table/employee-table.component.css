@@ -1,0 +1,185 @@
+*{
+  box-sizing: content-box;
+}
+
+:host {
+  display: block;
+  height: 100%;
+  min-height: 0;
+}
+
+.table-container {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  background: var(--bg-card);
+  overflow: auto;
+  border-radius: 0 0 10px 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+table {
+  width: 100%;
+  min-width: 1100px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+/* Column widths */
+
+th:nth-child(1) {
+  width: 8%;
+}
+
+th:nth-child(2) {
+  width: 18%;
+}
+
+th:nth-child(3) {
+  width: 27%;
+}
+
+th:nth-child(4) {
+  width: 18%;
+}
+
+th:nth-child(5) {
+  width: 9%;
+}
+
+th:nth-child(6) {
+  width: 23%;
+}
+
+th:nth-child(7) {
+  width: 14%;
+}
+
+/* Header */
+
+thead {
+  background: var(--bg-soft);
+}
+
+th {
+  padding: 0 16px;
+  text-align: left;
+  vertical-align: middle;
+
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+
+  color: var(--text-secondary);
+
+  border-bottom: 1px solid var(--border);
+  height: 42px;
+  box-sizing: border-box;
+}
+
+/* Table data */
+
+td {
+  padding: 0 16px;
+  height: 42px;
+
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  
+  line-height: 1.5;
+
+  border-bottom: 1px solid var(--border-soft);
+  box-sizing: border-box;
+
+  color: var(--text-secondary);
+
+  vertical-align: middle;
+
+}
+  /*overflow-wrap: anywhere;
+
+
+/* Employee name */
+
+td strong {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Hover */
+
+tbody tr:hover {
+  background: var(--bg-hover);
+}
+
+/* Age sorting */
+
+.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sortable:hover {
+  color: var(--action);
+}
+
+.sortable span {
+  margin-left: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Department */
+
+.department-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px 10px;
+  color: var(--text-secondary); /* same color as table text */
+
+  
+
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 14px; /* same as table data */
+  font-weight: 400; /* same as normal table data */
+
+  line-height: 1.5;
+}
+
+/* Action buttons */
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.action-buttons app-button {
+  display: inline-flex;
+}
+
+/* Empty state */
+
+.empty-message {
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--text-muted);
+}
+
+.empty-message h3 {
+  margin-bottom: 6px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.empty-message p {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 13px;
+}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" font-family="Arial,Helvetica,sans-serif" font-size="13"><rect width="720" height="300" fill="#f5f7fb"/>
+<rect width="720" height="40" fill="#fff" stroke="#dce4ea"/><text x="20" y="25" font-weight="bold" fill="#1e3a5f">Employee Management</text>
+<rect x="0" y="40" width="48" height="260" fill="#fff" stroke="#dce4ea"/>
+<rect x="320" y="56" width="200" height="30" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="330" y="75" fill="#64748b">Search...</text>
+<rect x="534" y="56" width="168" height="30" rx="4" fill="#007a8c"/><text x="618" y="75" text-anchor="middle" fill="#fff">+ Add Employee</text>
+<rect x="64" y="100" width="638" height="28" fill="#f8fafc"/>
+<text x="74" y="119" font-weight="bold" fill="#374151">ID</text><text x="124" y="119" font-weight="bold" fill="#374151">Name</text><text x="264" y="119" font-weight="bold" fill="#374151">Department</text><text x="394" y="119" font-weight="bold" fill="#374151">Age ↑</text><text x="474" y="119" font-weight="bold" fill="#374151">Position</text><text x="624" y="119" font-weight="bold" fill="#374151">Actions</text>
+<g fill="#374151"><text x="74" y="154">1</text><text x="124" y="154">Asha Nair</text><text x="264" y="154">Engineering</text><text x="394" y="154">29</text><text x="474" y="154">Developer</text>
+<text x="74" y="190">2</text><text x="124" y="190">Ravi Kumar</text><text x="264" y="190">HR</text><text x="394" y="190">34</text><text x="474" y="190">Manager</text></g>
+<g><rect x="618" y="138" width="28" height="24" rx="4" fill="#e8f3fb" stroke="#b9e3eb"/><rect x="654" y="138" width="28" height="24" rx="4" fill="#fee2e2" stroke="#fecaca"/>
+<rect x="618" y="174" width="28" height="24" rx="4" fill="#e8f3fb" stroke="#b9e3eb"/><rect x="654" y="174" width="28" height="24" rx="4" fill="#fee2e2" stroke="#fecaca"/></g>
+<text x="64" y="270" fill="#64748b" font-size="12">Add, Edit and Delete controls appear only for users with permission.</text>
+</svg>

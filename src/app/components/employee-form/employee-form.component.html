@@ -1,0 +1,31 @@
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" novalidate>
+  @for (field of fields; track field.name) {
+    <app-input-field
+      [field]="field"
+      [formControlName]="field.name"
+    ></app-input-field>
+  }
+
+  <div class="form-actions">
+    <app-button
+      [button]="{
+        label: 'Cancel',
+        type: 'button',
+        disabled: false,
+        className: 'cancel-btn',
+      }"
+      (clicked)="onCancel()"
+    >
+    </app-button>
+
+    <app-button
+      [button]="{
+        label: isEditMode() ? 'Update Employee' : 'Save Employee',
+        type: 'submit',
+        disabled: !isFormValid,
+        className: 'save-btn',
+      }"
+    >
+    </app-button>
+  </div>
+</form>

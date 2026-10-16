@@ -1,0 +1,20 @@
+<button
+  [type]="button().type"
+  [disabled]="button().disabled"
+  [class]="button().className"
+  (click)="onClick()"
+  [attr.aria-label]="button().label"
+  [attr.title]="button().label"
+>
+@if (button().icon === 'edit') {
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <use href="assets/icons.svg#icon-edit"></use>
+  </svg>
+  } @else if (button().icon === 'delete') {
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <use href="assets/icons.svg#icon-delete"></use>
+    </svg>
+  } @else {
+    {{ button().label }}
+  }
+  </button>

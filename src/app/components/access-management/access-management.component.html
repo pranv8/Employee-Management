@@ -1,0 +1,60 @@
+<section class="page">
+  <header class="page-header">
+    <h1>Access Management</h1>
+    <p>
+      Choose which registered users can add, edit or delete employees.
+      Changes are saved immediately.
+    </p>
+  </header>
+
+  @if (savedMessage) {
+    <p class="saved" role="status">{{ savedMessage }}</p>
+  }
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th class="center">Add</th>
+          <th class="center">Edit</th>
+          <th class="center">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users; track user.email) {
+          <tr>
+            <td><strong>{{ user.username }}</strong></td>
+            <td>{{ user.email }}</td>
+            <td class="center">
+              <app-custom-checkbox
+                [checked]="user.permissions.add"
+                [ariaLabel]="'Allow ' + user.username + ' to add employees'"
+                (checkedChange)="toggle(user, 'add')"
+              />
+            </td>
+            <td class="center">
+              <app-custom-checkbox
+                [checked]="user.permissions.edit"
+                [ariaLabel]="'Allow ' + user.username + ' to edit employees'"
+                (checkedChange)="toggle(user, 'edit')"
+              />
+            </td>
+            <td class="center">
+              <app-custom-checkbox
+                [checked]="user.permissions.delete"
+                [ariaLabel]="'Allow ' + user.username + ' to delete employees'"
+                (checkedChange)="toggle(user, 'delete')"
+              />
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5" class="empty">No registered users yet.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,174 @@
+.employee-directory {
+  display: flex;
+  align-items: stretch;
+  gap: 3px;
+  min-width: 0;
+}
+
+.employee-list-panel {
+  display: flex;
+  width: 280px;
+  min-width: 0;
+  height: min(607px, calc(100vh - 66px));
+  min-height: 350px;
+  flex: 0 0 280px;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 3px;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+
+.list-header {
+  margin-bottom: 16px;
+}
+
+.list-header h1 {
+  margin-bottom: 5px;
+  color: var(--text-primary);
+  font-size: 20px;
+}
+
+.list-header p {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.list-search {
+  display: block;
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+
+/* =========================================================
+   EMPLOYEE LIST
+   ========================================================= */
+
+.employee-list {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+
+  overflow-y: auto;
+
+  list-style: none;
+}
+
+
+/* =========================================================
+   EMPLOYEE LIST ITEM
+   ========================================================= */
+
+.employee-list-item {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 5px;
+
+  padding: 11px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  background: transparent;
+  color: var(--text-secondary);
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.employee-list-item:hover {
+  background: var(--bg-hover);
+}
+
+.employee-list-item.selected {
+  border-color: var(--action-border);
+  background: var(--action-soft);
+  color: var(--action-strong);
+}
+
+
+/* Employee name */
+
+.employee-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* Employee ID */
+
+.employee-id {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+
+/* Empty list */
+
+.empty-list {
+  padding: 16px 8px;
+
+  color: var(--text-muted);
+
+  font-size: 13px;
+
+  text-align: center;
+}
+
+
+/* Employee details */
+
+.employee-details {
+  min-width: 0;
+  flex: 1;
+}
+
+
+/* Not found */
+
+.not-found {
+  padding: 24px;
+
+  border: 1px solid var(--danger-border);
+  border-radius: 4px;
+
+  background: var(--bg-card);
+
+  color: var(--danger);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .employee-directory {
+    flex-direction: column;
+  }
+
+  .employee-list-panel {
+    width: 100%;
+    min-height: 0;
+
+    height: auto;
+
+    flex: auto;
+  }
+
+  .employee-list {
+    max-height: 240px;
+    flex: 0 1 auto;
+    overflow-y: auto;
+  }
+
+  .employee-details {
+    width: 100%;
+  }
+}

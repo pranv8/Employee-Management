@@ -1,0 +1,72 @@
+<div class="form-group" [class.compact]="field().compact">
+  @if (!field().hideLabel) {
+    <label [for]="field().name">
+      {{ field().label }}
+
+      @if (field().required) {
+        <span class="required"> * </span>
+      }
+    </label>
+  }
+
+  @if (field().type === 'select') {
+    <select
+      [id]="field().name"
+      [name]="field().name"
+      [value]="value ?? ''"
+      [disabled]="isDisabled || field().disable === true"
+      [required]="field().required"
+      [attr.aria-label]="field().hideLabel ? field().label : null"
+      [attr.aria-invalid]="showError"
+      [class.ng-invalid]="isInvalid"
+      [class.ng-valid]="isValid"
+      [class.ng-touched]="isTouched"
+      [class.ng-dirty]="isDirty"
+      [class.ng-untouched]="!isTouched"
+      [class.ng-pristine]="!isDirty"
+      [class.show-valid]="field().showValidState"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+    >
+      <option value="">
+        {{ field().placeholder }}
+      </option>
+
+      @for (option of field().options ?? []; track option) {
+        <option [value]="option">
+          {{ option }}
+        </option>
+      }
+    </select>
+  } @else {
+    <input
+      [id]="field().name"
+      [name]="field().name"
+      [type]="field().type === 'search' ? 'text' : field().type"
+      [value]="value ?? ''"
+      [disabled]="isDisabled || field().disable === true"
+      [placeholder]="field().placeholder ?? ''"
+      [required]="field().required"
+      [attr.autocomplete]="field().autocomplete ?? null"
+      [attr.aria-label]="field().hideLabel ? field().label : null"
+      [attr.aria-invalid]="showError"
+      [class.ng-invalid]="isInvalid"
+      [class.ng-valid]="isValid"
+      [class.ng-touched]="isTouched"
+      [class.ng-dirty]="isDirty"
+      [class.ng-untouched]="!isTouched"
+      [class.ng-pristine]="!isDirty"
+      [class.show-valid]="field().showValidState"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+    />
+  }
+
+  @if (showError) {
+    <small class="error" role="alert">{{ getErrorMessage() }}</small>
+  }
+
+  @if (field().hint) {
+    <small class="hint">{{ field().hint }}</small>
+  }
+</div>

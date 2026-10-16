@@ -1,0 +1,137 @@
+<header class="app-header">
+  <div class="header-brand">
+    <span class="brand-title">Employee Management</span>
+  </div>
+
+  <div class="header-actions">
+    <button
+      type="button"
+      class="theme-button"
+      [attr.aria-label]="themeToggleLabel()"
+      [attr.title]="themeToggleLabel()"
+      (click)="toggleTheme()"
+    >
+      @if (isDusk()) {
+        <!-- Sun: click to return to Day -->
+        <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <use href="assets/icons.svg#icon-sun"></use>
+        </svg>
+      } @else {
+        <!-- Moon: click to switch to Dusk -->
+        <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <use href="assets/icons.svg#icon-moon"></use>
+        </svg>
+      }
+    </button>
+
+    <div class="profile-menu-container" (click)="$event.stopPropagation()">
+      <button
+        type="button"
+        class="theme-button"
+        aria-label="Open settings menu"
+        title="Settings"
+        aria-haspopup="menu"
+        [attr.aria-expanded]="isSettingsMenuOpen"
+        (click)="toggleSettingsMenu()"
+      >
+        <svg class="theme-icon settings-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <use href="assets/icons.svg#icon-settings"></use>
+        </svg>
+      </button>
+
+      @if (isSettingsMenuOpen) {
+        <div class="profile-menu" role="menu">
+          <button type="button" role="menuitem" (click)="goTo('help')">Help</button>
+          <button type="button" role="menuitem" (click)="goTo('about')">About</button>
+          @if (isAdmin) {
+            <button type="button" role="menuitem" (click)="goTo('access-management')">
+              Access Management
+            </button>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="profile-menu-container" (click)="$event.stopPropagation()">
+      <button
+        type="button"
+        class="profile-button"
+        aria-label="Open profile menu"
+        title="Profile"
+        aria-haspopup="menu"
+        [attr.aria-expanded]="isProfileMenuOpen"
+        (click)="toggleProfileMenu()"
+      >
+        <svg class="profile-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <use href="assets/icons.svg#icon-profile"></use>
+        </svg>
+      </button>
+
+      @if (isProfileMenuOpen) {
+        <div class="profile-menu" role="menu">
+          <button type="button" role="menuitem" (click)="openProfile()">Profile</button>
+          <button
+            type="button"
+            class="profile-menu-logout"
+            role="menuitem"
+            (click)="logout()"
+          >
+            Logout
+          </button>
+        </div>
+      }
+    </div>
+
+  </div>
+</header>
+
+@if (isProfileModalOpen) {
+  <div class="profile-overlay" (click)="closeProfile()">
+    <section
+      class="profile-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="profile-title"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="profile-modal-header">
+        <div>
+          <h2 id="profile-title">Profile</h2>
+          <p>Current logged-in user</p>
+        </div>
+
+        <button
+          type="button"
+          class="close-button"
+          aria-label="Close profile"
+          (click)="closeProfile()"
+        >
+          &times;
+        </button>
+      </div>
+
+      <div class="profile-avatar" aria-hidden="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <use href="assets/icons.svg#icon-profile"></use>
+        </svg>
+      </div>
+
+      @if (currentUser; as user) {
+        <div class="profile-details">
+          <div class="profile-field">
+            <span>Username</span>
+            <strong>{{ user.username }}</strong>
+          </div>
+
+          <div class="profile-field">
+            <span>Email</span>
+            <strong>{{ user.email }}</strong>
+          </div>
+        </div>
+      } @else {
+        <p class="profile-error">User information is unavailable.</p>
+      }
+
+    </section>
+  </div>
+}

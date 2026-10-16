@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" font-family="Arial,Helvetica,sans-serif" font-size="13"><rect width="720" height="300" fill="#f5f7fb"/>
+<rect x="230" y="30" width="260" height="240" rx="6" fill="#fff" stroke="#dce4ea"/>
+<text x="360" y="62" text-anchor="middle" font-size="17" font-weight="bold" fill="#1e3a5f">Login</text>
+<rect x="250" y="82" width="220" height="32" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="260" y="103" fill="#64748b">Email</text>
+<rect x="250" y="128" width="220" height="32" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="260" y="149" fill="#64748b">Password</text>
+<rect x="250" y="176" width="220" height="34" rx="4" fill="#007a8c"/><text x="360" y="198" text-anchor="middle" fill="#fff">Login</text>
+<text x="360" y="240" text-anchor="middle" fill="#007f94">Don't have an account? Sign up</text>
+</svg>

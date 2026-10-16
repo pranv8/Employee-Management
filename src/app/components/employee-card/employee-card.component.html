@@ -1,0 +1,103 @@
+<section class="employee-card" aria-live="polite">
+
+  @if (employee(); as selectedEmployee) {
+
+    <!-- Employee Header -->
+    <header class="card-header">
+
+      <div class="avatar" aria-hidden="true">
+        {{ selectedEmployee.employeeName.charAt(0).toUpperCase() }}
+      </div>
+
+      <div class="employee-heading">
+
+        <h1>
+          {{ selectedEmployee.employeeName }}
+        </h1>
+
+        <p>
+          {{ selectedEmployee.employeePosition }}
+        </p>
+
+      </div>
+
+    </header>
+
+
+    <!-- Employee Details -->
+    <div class="details">
+
+      <!-- Employee ID -->
+      <div class="detail-box">
+
+        <span class="detail-label">
+          Employee ID
+        </span>
+
+        <span class="detail-value">
+          {{ selectedEmployee.employeeId }}
+        </span>
+
+      </div>
+
+
+      <!-- Age -->
+      <div class="detail-box">
+
+        <span class="detail-label">
+          Age
+        </span>
+
+        <span class="detail-value">
+          {{ selectedEmployee.employeeAge }}
+        </span>
+
+      </div>
+
+
+      <!-- Department -->
+      <div class="detail-box">
+
+        <span class="detail-label">
+          Department
+        </span>
+
+        <span class="detail-value">
+          {{ selectedEmployee.employeeDepartment }}
+        </span>
+
+      </div>
+
+
+      <!-- Role -->
+      <div class="detail-box">
+
+        <span class="detail-label">
+          Role
+        </span>
+
+        <span class="detail-value">
+          {{ selectedEmployee.employeePosition }}
+        </span>
+
+      </div>
+
+    </div>
+
+  } @else {
+
+    <div class="empty-card">
+
+      <h1>
+        Select an employee
+      </h1>
+
+      <p>
+        Choose a name from the list to view their details.
+      </p>
+
+    </div>
+
+  }
+
+</section>

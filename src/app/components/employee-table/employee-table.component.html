@@ -1,0 +1,105 @@
+<section class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+
+        <th>Name</th>
+
+        <th>Email</th>
+
+        <th>Department</th>
+
+        <th class="sortable" (click)="onSortAge()">
+          Age
+
+          <span>
+            {{ ageAscending() ? '↑' : '↓' }}
+          </span>
+        </th>
+
+        <th>Position</th>
+
+        @if (canEdit() || canDelete()) {
+          <th>Actions</th>
+        }
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (employee of employees(); track employee.employeeId) {
+        <tr>
+          <td>
+            {{ employee.employeeId }}
+          </td>
+
+          <td>
+            <strong>
+              {{ employee.employeeName }}
+            </strong>
+          </td>
+
+          <td>
+            {{ employee.employeeEmail }}
+          </td>
+
+          <td>
+            <span class="department-badge">
+              {{ employee.employeeDepartment }}
+            </span>
+          </td>
+
+          <td>
+            {{ employee.employeeAge }}
+          </td>
+
+          <td>
+            {{ employee.employeePosition }}
+          </td>
+
+          @if (canEdit() || canDelete()) {
+          <td>
+            <div class="action-buttons">
+              @if (canEdit()) {
+              <app-button
+                [button]="{
+                  label: 'Edit',
+                  type: 'button',
+                  disabled: false,
+                  className: 'edit-btn',
+                  icon : 'edit',
+                }"
+                (clicked)="onEdit(employee)"
+              >
+              </app-button>
+              }
+
+              @if (canDelete()) {
+              <app-button
+                [button]="{
+                  label: 'Delete',
+                  type: 'button',
+                  disabled: false,
+                  className: 'delete-btn',
+                  icon : 'delete',
+                }"
+                (clicked)="onDelete(employee)"
+              >
+              </app-button>
+              }
+            </div>
+          </td>
+          }
+        </tr>
+      } @empty {
+        <tr>
+          <td [attr.colspan]="canEdit() || canDelete() ? 7 : 6" class="empty-message">
+            <h3>No employees found</h3>
+
+            <p>Try changing your search.</p>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

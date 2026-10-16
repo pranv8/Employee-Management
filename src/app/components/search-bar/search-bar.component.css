@@ -1,0 +1,57 @@
+.search-container {
+  position: relative;
+
+  width: 342px;
+  max-width: 100%;
+}
+
+.search-icon {
+  position: absolute;
+
+  right: 13px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  display: flex;
+
+  color: var(--text-muted);
+
+  pointer-events: none;
+}
+
+.search-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.clear-search {
+  position: absolute;
+
+  right: 34px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--text-muted);
+
+  font-size: 18px;
+
+  cursor: pointer;
+}
+
+.clear-search:hover {
+  color: var(--text-primary);
+}
+
+@media (max-width: 850px) {
+  .search-container {
+    width: 100%;
+  }
+} 

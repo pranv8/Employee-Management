@@ -1,0 +1,121 @@
+<section class="employee-page">
+
+  <!-- Page Header -->
+  <header class="page-header">
+
+    <div class="page-title">
+      <svg
+        class="page-title-icon"
+        viewBox="0 0 48 48"
+        role="img"
+        aria-labelledby="employee-directory-icon-title"
+      >
+        <title id="employee-directory-icon-title">Employee directory</title>
+        <use href="assets/icons.svg#icon-employee-directory"></use>
+      </svg>
+    </div>
+
+    <div class="header-actions">
+
+      <app-search-bar
+        placeholder="Search by name or department..."
+        (search)="searchEmployees($event)"
+        (clear)="clearEmployeeSearch()"
+      ></app-search-bar>
+
+      @if (canAdd) {
+      <app-button
+        [button]="{
+          label: '+ Add Employee',
+          type: 'button',
+          disabled: false,
+          className: 'add-btn'
+        }"
+        (clicked)="openAddEmployeeForm()"
+      ></app-button>
+      }
+
+    </div>
+
+  </header>
+
+
+  <!-- Employee Table -->
+  <app-employee-table
+    [employees]="filteredEmployeeList"
+    [ageAscending]="isAgeAscending"
+    [canEdit]="canEdit"
+    [canDelete]="canDelete"
+    (edit)="openEditEmployeeForm($event)"
+    (delete)="openDeleteConfirmation($event)"
+    (sortAge)="sortEmployeesByAge()"
+  ></app-employee-table>
+
+
+  <!-- Add / Edit Employee Modal -->
+  @if (isEmployeeFormModalOpen) {
+
+    <app-modal
+      [title]="isEditingEmployee ? 'Edit Employee' : 'Add Employee'"
+      [description]="
+        isEditingEmployee
+          ? 'Update employee information below.'
+          : 'Enter employee information below.'
+      "
+      (close)="closeEmployeeFormModal()"
+    >
+
+      <app-employee-form
+        [employee]="employeeBeingEdited"
+        [isEditMode]="isEditingEmployee"
+        (save)="saveEmployee($event)"
+        (cancel)="closeEmployeeFormModal()"
+      ></app-employee-form>
+
+    </app-modal>
+
+  }
+
+
+  <!-- Delete Confirmation Modal -->
+  @if (isDeleteConfirmationModalOpen) {
+
+    <app-modal
+      title="Delete Employee"
+      [description]="
+        'Are you sure you want to delete ' +
+        employeePendingDeletion?.employeeName +
+        '\'s data?'
+      "
+      (close)="closeDeleteConfirmationModal()"
+    >
+
+      <div class="form-actions">
+
+        <app-button
+          [button]="{
+            label: 'Cancel',
+            type: 'button',
+            disabled: false,
+            className: 'cancel-btn'
+          }"
+          (clicked)="closeDeleteConfirmationModal()"
+        ></app-button>
+
+        <app-button
+          [button]="{
+            label: 'Delete',
+            type: 'button',
+            disabled: false,
+            className: 'delete-confirm-btn'
+          }"
+          (clicked)="confirmEmployeeDelete()"
+        ></app-button>
+
+      </div>
+
+    </app-modal>
+
+  }
+
+</section>

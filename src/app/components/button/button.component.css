@@ -1,0 +1,113 @@
+button {
+  border: none;
+
+  padding: 11px 18px;
+
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+button:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}
+
+.add-btn {
+  background: var(--button-bg);
+
+  color: var(--on-accent);
+
+  padding: 12px 18px;
+
+  border-radius: 4px;
+}
+
+.save-btn {
+  background: var(--action);
+
+  color: var(--on-accent);
+}
+
+.cancel-btn {
+  background: var(--button-secondary-bg);
+
+  color: var(--primary);
+}
+
+
+.edit-btn,
+.delete-btn {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--bg-card);
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.edit-btn svg,
+.delete-btn svg {
+  width: 16px;
+  height: 16px;
+}
+.edit-btn svg,
+.delete-btn svg {
+  width: 17px;
+  height: 17px;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  background: var(--bg-hover);
+}
+
+.edit-btn:active,
+.delete-btn:active {
+  transform: scale(0.95);
+}
+
+.delete-confirm-btn {
+  background: var(--button-bg);
+
+  color: var(--on-accent);
+}
+.logout-btn {
+  background: var(--button-bg);
+
+  color: var(--on-accent);
+
+  padding: 12px 18px;
+
+  border-radius: 4px;
+}
+
+/* Hover states */
+.add-btn:hover:not(:disabled),
+.delete-confirm-btn:hover:not(:disabled),
+.logout-btn:hover:not(:disabled) {
+  background: var(--button-hover);
+}
+
+.save-btn:hover:not(:disabled) {
+  background: var(--action-strong);
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background: var(--border);
+}

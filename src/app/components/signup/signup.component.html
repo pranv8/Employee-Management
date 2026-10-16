@@ -1,0 +1,83 @@
+<div class="signup-page">
+
+  <div class="signup-card">
+
+    <div class="signup-header">
+
+      <h1>Create Account</h1>
+
+      <p>
+        Register to access the employee management system.
+      </p>
+
+    </div>
+
+
+    <form
+      [formGroup]="signupForm"
+      (ngSubmit)="onSubmit()"
+      novalidate
+    >
+
+      <app-input-field
+        [field]="usernameField"
+        formControlName="username"
+      ></app-input-field>
+
+      <app-input-field
+        [field]="emailField"
+        formControlName="email"
+      ></app-input-field>
+
+      <app-input-field
+        [field]="passwordField"
+        formControlName="password"
+      ></app-input-field>
+
+      <app-input-field
+        [field]="confirmPasswordField"
+        formControlName="confirmPassword"
+      ></app-input-field>
+
+
+      <!-- Signup Error -->
+      @if (signupError) {
+
+        <div class="signup-error">
+          {{ signupError }}
+        </div>
+
+      }
+
+
+      <!-- Signup Button -->
+      <button
+        type="submit"
+        [disabled]="signupForm.invalid"
+      >
+        Sign Up
+      </button>
+
+
+      <!-- Login Link -->
+      <div class="login-link">
+
+        <span>
+          Already have an account?
+        </span>
+
+        <button
+          type="button"
+          class="link-button"
+          (click)="goToLogin()"
+        >
+          Login
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
