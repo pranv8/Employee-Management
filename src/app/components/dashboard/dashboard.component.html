@@ -7,7 +7,7 @@
       <h3>Dashboard</h3>
 
       <p class="dashboard-description">
-        Explore how your employees are distributed across departments.
+        Explore how your employees are distributed across departments and age groups.
       </p>
     </div>
   </header>
@@ -61,6 +61,58 @@
     <footer class="chart-footer">
       <span class="legend-dot" aria-hidden="true"></span>
       <span>Employees per department</span>
+    </footer>
+  </section>
+
+  <section class="chart-card" aria-labelledby="age-chart-title">
+    <header class="chart-header">
+      <div>
+        <h2 id="age-chart-title">Employees by age group</h2>
+        <p class="chart-subtitle">
+          Number of employees in each age group
+        </p>
+      </div>
+
+      <div class="total-summary" aria-label="Total employees">
+        <span class="total-label">Total employees</span>
+        <strong>{{ totalEmployees }}</strong>
+      </div>
+    </header>
+
+    <p *ngIf="isLoading" class="chart-state" role="status">
+      Loading employee data…
+    </p>
+
+    <p *ngIf="errorMessage" class="chart-state chart-error" role="alert">
+      {{ errorMessage }}
+    </p>
+
+    <p
+      *ngIf="!isLoading && !errorMessage && totalEmployees === 0"
+      class="chart-state"
+    >
+      No employee data is available to display.
+    </p>
+
+    <div
+      *ngIf="!isLoading && !errorMessage && totalEmployees > 0"
+      class="chart-scroll"
+      role="region"
+      aria-label="Scrollable employees by age group chart"
+      tabindex="0"
+    >
+      <div class="dashboard-chart">
+        <app-chart
+          [options]="ageChartOptions"
+          ariaLabel="Employees by age group"
+          [style.--chart-category-count]="ageGroups.length"
+        ></app-chart>
+      </div>
+    </div>
+
+    <footer class="chart-footer">
+      <span class="legend-dot" aria-hidden="true"></span>
+      <span>Employees per age group</span>
     </footer>
   </section>
 </section>

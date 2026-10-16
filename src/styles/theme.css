@@ -22,11 +22,12 @@
   --bg-auth: #eaf0f6;         /* login page background */
 
   /* Text */
+  --chart-axis-label: #334155;
+  --chart-value-label: #0f172a;
   --text-primary: #1f2937;
   --text-secondary: #374151;
   --text-muted: #64748b;
-  --heading: #1e3a5f;
-  --chart-axis-label: #334155;
+  --heading: #1e3a5f;  /* number shown above each bar */
   --on-accent: #ddd5d5;       /* text on filled buttons */
 
   /* Borders */
@@ -76,12 +77,14 @@
   --bg-soft: #19243a;
   --bg-hover: #26344a;
   --bg-auth: #111827;
-
+  --chart-axis-label: #f8fafc;
+  --chart-value-label: #ffffff;  
   --text-primary: #e5edf5;
   --text-secondary: #aebdcd;
   --text-muted: #94a3b8;
   --heading: #e5edf5;
   --chart-axis-label: #f8fafc;
+  --chart-value-label: #ffffff;
   --on-accent: #0b1a22;
 
   --border: #334155;
