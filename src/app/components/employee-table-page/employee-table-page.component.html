@@ -56,6 +56,39 @@
     (sort)="sortEmployeesByAge()"
   ></app-custom-table>
 
+  @if (loadError) {
+    <p class="load-error" role="alert">{{ loadError }}</p>
+  }
+
+  <nav class="pagination" aria-label="Employee table pagination">
+    <span class="pagination-summary">
+      Showing {{ firstEmployeeNumber }}–{{ lastEmployeeNumber }} of
+      {{ totalEmployees }} employees
+    </span>
+
+    <div class="pagination-controls">
+      <button
+        type="button"
+        class="pagination-button"
+        [disabled]="isLoading || currentPage === 1"
+        (click)="previousPage()"
+      >
+        Previous
+      </button>
+      <span class="page-indicator">
+        Page {{ currentPage }} of {{ totalPages }}
+      </span>
+      <button
+        type="button"
+        class="pagination-button"
+        [disabled]="isLoading || currentPage >= totalPages"
+        (click)="nextPage()"
+      >
+        Next
+      </button>
+    </div>
+  </nav>
+
 
   <!-- Add / Edit Employee Modal -->
   @if (isEmployeeFormModalOpen) {

@@ -1,8 +1,14 @@
 
-import { Component } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { EmployeeService } from '../../services/employee.service';
+import { MockApiService } from '../../services/mockapi.service';
 import { AuthService } from '../../services/auth.service';
 import { Employee } from '../../interface/employee.interface';
 import { TableColumn } from '../../interface/table-column.inteface';
@@ -25,7 +31,7 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
   templateUrl: './employee-table-page.component.html',
   styleUrl: './employee-table-page.component.css',
 })
-export class EmployeeTablePageComponent {
+export class EmployeeTablePageComponent implements OnDestroy {
   public readonly employeeColumns: TableColumn[] = [
     { key: 'employeeId', label: 'ID' },
     { key: 'employeeName', label: 'Name' },
@@ -39,25 +45,36 @@ export class EmployeeTablePageComponent {
     { key: 'employeePosition', label: 'Position' },
   ];
 
-  public employeeList: Employee[] = [];
   public filteredEmployeeList: Employee[] = [];
   public employeeBeingEdited: Employee | null = null;
   public employeePendingDeletion: Employee | null = null;
   public searchQuery = '';
+  public readonly pageSize = 8;
+  public currentPage = 1;
+  public totalEmployees = 0;
   public isEmployeeFormModalOpen = false;
   public isDeleteConfirmationModalOpen = false;
   public isEditingEmployee = false;
   public isAgeAscending = true;
+  public hasAgeSort = false;
 
   public isLoading = true;
   public loadError = '';
 
+  private pageRequest?: Subscription;
+
   constructor(
     private readonly employeeService: EmployeeService,
+    private readonly mockApiService: MockApiService,
     private readonly authService: AuthService,
     private readonly router: Router,
+    private readonly changeDetector: ChangeDetectorRef,
   ) {
     this.loadEmployeeList();
+  }
+
+  public ngOnDestroy(): void {
+    this.pageRequest?.unsubscribe();
   }
 
   // Permissions are read live so admin changes apply immediately.
@@ -73,22 +90,74 @@ export class EmployeeTablePageComponent {
     return this.authService.hasPermission('delete');
   }
 
+  public get totalPages(): number {
+    return Math.max(1, Math.ceil(this.totalEmployees / this.pageSize));
+  }
+
+  public get firstEmployeeNumber(): number {
+    return this.totalEmployees === 0
+      ? 0
+      : (this.currentPage - 1) * this.pageSize + 1;
+  }
+
+  public get lastEmployeeNumber(): number {
+    return Math.min(this.currentPage * this.pageSize, this.totalEmployees);
+  }
+
   public loadEmployeeList(): void {
+    this.pageRequest?.unsubscribe();
     this.isLoading = true;
     this.loadError = '';
 
-    this.employeeService.loadEmployees().subscribe({
-      next: (employees) => {
-        this.employeeList = employees;
-        this.filteredEmployeeList = [...employees];
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Failed to load employees:', error);
-        this.loadError = 'Unable to load employees. Please try again.';
-        this.isLoading = false;
-      },
-    });
+    this.pageRequest = this.mockApiService
+      .loadEmployeePage(
+        this.currentPage,
+        this.pageSize,
+        this.searchQuery,
+        this.hasAgeSort ? this.isAgeAscending : null,
+      )
+      .subscribe({
+        next: ({ employees, total }) => {
+          this.totalEmployees = total;
+          const lastPage = Math.max(
+            1,
+            Math.ceil(total / this.pageSize),
+          );
+
+          if (this.currentPage > lastPage) {
+            this.currentPage = lastPage;
+            this.loadEmployeeList();
+            return;
+          }
+
+          this.filteredEmployeeList = employees;
+          this.isLoading = false;
+          this.changeDetector.markForCheck();
+        },
+        error: (error) => {
+          console.error('Failed to load employees:', error);
+          this.loadError = 'Unable to load employees. Please try again.';
+          this.isLoading = false;
+          this.changeDetector.markForCheck();
+        },
+      });
+  }
+
+  public goToPage(page: number): void {
+    if (page < 1 || page > this.totalPages || page === this.currentPage) {
+      return;
+    }
+
+    this.currentPage = page;
+    this.loadEmployeeList();
+  }
+
+  public previousPage(): void {
+    this.goToPage(this.currentPage - 1);
+  }
+
+  public nextPage(): void {
+    this.goToPage(this.currentPage + 1);
   }
 
   public openAddEmployeeForm(): void {
@@ -130,10 +199,10 @@ export class EmployeeTablePageComponent {
       this.employeeService.createEmployee(employeeData);
     }
 
-    this.employeeList = this.employeeService.getAllEmployees();
-    this.filteredEmployeeList = [...this.employeeList];
     this.searchQuery = '';
+    this.currentPage = 1;
     this.closeEmployeeFormModal();
+    this.loadEmployeeList();
   }
 
   public openDeleteConfirmation(employee: Employee): void {
@@ -158,36 +227,29 @@ export class EmployeeTablePageComponent {
       this.employeePendingDeletion.employeeId,
     );
 
-    this.employeeList = this.employeeService.getAllEmployees();
-    this.filteredEmployeeList = [...this.employeeList];
     this.searchQuery = '';
     this.closeDeleteConfirmationModal();
+    this.loadEmployeeList();
   }
 
   public searchEmployees(searchText: string): void {
     this.searchQuery = searchText.toLowerCase().trim();
-
-    this.filteredEmployeeList =
-      this.employeeService.filterEmployees(
-        this.employeeList,
-        this.searchQuery,
-        ['employeeName', 'employeeDepartment'],
-      );
+    this.currentPage = 1;
+    this.loadEmployeeList();
   }
 
   public clearEmployeeSearch(): void {
     this.searchQuery = '';
-    this.filteredEmployeeList = [...this.employeeList];
+    this.currentPage = 1;
+    this.loadEmployeeList();
   }
 
   public sortEmployeesByAge(): void {
-    this.filteredEmployeeList =
-      this.employeeService.sortEmployeesByAge(
-        this.filteredEmployeeList,
-        this.isAgeAscending,
-      );
-
-    this.isAgeAscending = !this.isAgeAscending;
+    if (this.hasAgeSort) {
+      this.isAgeAscending = !this.isAgeAscending;
+    }
+    this.hasAgeSort = true;
+    this.loadEmployeeList();
   }
 
   public logout(): void {
