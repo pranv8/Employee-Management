@@ -31,6 +31,7 @@ yarn-error.log
 
 # Miscellaneous
 /.angular/cache
+/.nx
 .sass-cache/
 /connect.lock
 /coverage
@@ -42,3 +43,5 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+.angular

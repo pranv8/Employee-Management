@@ -1,0 +1,197 @@
+.signup-page {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: var(--bg-primary);
+
+  padding: 20px;
+}
+
+.signup-card {
+  width: 100%;
+  max-width: 400px;
+
+  background: var(--bg-card);
+
+  padding: 16px;
+
+  border-radius: 4px;
+
+  box-shadow: var(--shadow-lg);
+
+  box-sizing: border-box;
+}
+
+.signup-header {
+  text-align: center;
+  
+  margin-bottom: 30px;
+}
+
+.signup-header h1 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.signup-header p {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 14px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 12px;
+
+  border: 1px solid var(--border-strong);
+
+  background: var(--bg-input);
+
+  color: var(--text-primary);
+
+  border-radius: 6px;
+
+  font-size: 15px;
+}
+
+.form-group input:focus {
+  outline: none;
+
+  border-color: var(--action);
+
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+.form-group input.ng-invalid.ng-touched {
+  border-color: var(--danger);
+}
+
+.form-group input.ng-valid.ng-touched {
+  border-color: var(--success);
+}
+
+.form-group input::placeholder {
+  color: var(--text-muted);
+}
+
+.error {
+  display: block;
+
+  margin-top: 6px;
+
+  color: var(--danger);
+
+  font-size: 13px;
+
+  line-height: 1.4;
+}
+
+.password-hint {
+  display: block;
+
+  margin-top: 6px;
+
+  color: var(--text-muted);
+
+  font-size: 12px;
+
+  line-height: 1.4;
+}
+
+.signup-error {
+  margin-bottom: 15px;
+
+  padding: 10px;
+
+  background: var(--danger-soft);
+
+  color: var(--danger);
+
+  border-radius: 6px;
+
+  font-size: 14px;
+}
+
+form > button[type="submit"] {
+  width: 100%;
+
+  padding: 12px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: var(--action);
+
+  color: var(--on-accent);
+
+  font-size: 16px;
+
+  cursor: pointer;
+}
+
+form > button[type="submit"]:hover:not(:disabled) {
+  background: var(--action-strong);
+}
+
+form > button[type="submit"]:disabled {
+  background: var(--disabled-bg);
+
+  color: var(--disabled-text);
+
+  cursor: not-allowed;
+}
+
+.login-link {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 5px;
+
+  margin-top: 20px;
+
+  font-size: 14px;
+
+  color: var(--text-muted);
+}
+
+.link-button {
+  border: none;
+
+  background: none;
+
+  padding: 0;
+
+  color: var(--action);
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.link-button:hover {
+  text-decoration: underline;
+}

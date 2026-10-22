@@ -1,0 +1,86 @@
+{
+  "name": "employee-management",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/employee-management/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/employee-management",
+        "browser": "apps/employee-management/src/main.ts",
+        "tsConfig": "apps/employee-management/tsconfig.app.json",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/employee-management/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/employee-management/src/assets",
+            "output": "assets"
+          }
+        ],
+        "styles": ["apps/employee-management/src/styles.css"]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      }
+    },
+    "serve": {
+      "continuous": true,
+      "readyWhen": {
+        "signal": true
+      },
+      "executor": "@angular/build:dev-server",
+      "defaultConfiguration": "development",
+      "configurations": {
+        "production": {
+          "buildTarget": "employee-management:build:production"
+        },
+        "development": {
+          "buildTarget": "employee-management:build:development"
+        }
+      }
+    },
+    "serve-static": {
+      "continuous": true,
+      "readyWhen": {
+        "signal": true
+      },
+      "dependsOn": ["build"],
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "employee-management:build",
+        "staticFilePath": "dist/apps/employee-management/browser",
+        "spa": true
+      }
+    },
+    "test": {
+      "executor": "@angular/build:unit-test"
+    }
+  }
+}

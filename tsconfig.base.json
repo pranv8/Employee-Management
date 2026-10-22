@@ -1,0 +1,21 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve",
+    "skipLibCheck": true,
+    "paths": {
+      "@employee-management/shared-ui": [
+        "./libs/shared-ui/src/index.ts"
+      ],
+      "@employee-management/employee-data": [
+        "./libs/employee-data/src/index.ts"
+      ],
+      "@employee-management/auth": [
+        "./libs/auth/src/index.ts"
+      ]
+    }
+  }
+}
