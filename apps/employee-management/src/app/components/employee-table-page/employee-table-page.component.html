@@ -1,8 +1,6 @@
 <section class="employee-page">
-
   <!-- Page Header -->
   <header class="page-header">
-
     <div class="page-title">
       <svg
         class="page-title-icon"
@@ -16,7 +14,6 @@
     </div>
 
     <div class="header-actions">
-
       <app-search-bar
         placeholder="Search by name or department..."
         (search)="searchEmployees($event)"
@@ -24,37 +21,41 @@
       ></app-search-bar>
 
       @if (canAdd) {
-      <app-button
-        [button]="{
-          label: '+ Add Employee',
-          type: 'button',
-          disabled: false,
-          className: 'add-btn'
-        }"
-        (clicked)="openAddEmployeeForm()"
-      ></app-button>
+        <app-button
+          [button]="{
+            label: '+ Add Employee',
+            type: 'button',
+            disabled: false,
+            className: 'add-btn',
+          }"
+          (clicked)="openAddEmployeeForm()"
+        ></app-button>
       }
-
     </div>
-
   </header>
 
-
   <!-- Employee Table -->
-  <app-custom-table
-    [rows]="filteredEmployeeList"
-    [columns]="employeeColumns"
-    rowKey="employeeId"
-    sortKey="employeeAge"
-    [sortAscending]="isAgeAscending"
-    [canEdit]="canEdit"
-    [canDelete]="canDelete"
-    emptyStateTitle="No employees found"
-    emptyStateMessage="Try changing your search."
-    (edit)="openEditEmployeeForm($event)"
-    (delete)="openDeleteConfirmation($event)"
-    (sort)="sortEmployeesByAge()"
-  ></app-custom-table>
+  @if (isLoading) {
+    <div class="table-loading" role="status" aria-live="polite">
+      <span class="loading-spinner" aria-hidden="true"></span>
+      <span>Loading employees...</span>
+    </div>
+  } @else {
+    <app-custom-table
+      [rows]="filteredEmployeeList"
+      [columns]="employeeColumns"
+      rowKey="employeeId"
+      sortKey="employeeAge"
+      [sortAscending]="isAgeAscending"
+      [canEdit]="canEdit"
+      [canDelete]="canDelete"
+      emptyStateTitle="No employees found"
+      emptyStateMessage="Try changing your search."
+      (edit)="openEditEmployeeForm($event)"
+      (delete)="openDeleteConfirmation($event)"
+      (sort)="sortEmployeesByAge()"
+    ></app-custom-table>
+  }
 
   @if (loadError) {
     <p class="load-error" role="alert">{{ loadError }}</p>
@@ -62,8 +63,7 @@
 
   <nav class="pagination" aria-label="Employee table pagination">
     <span class="pagination-summary">
-      Showing {{ firstEmployeeNumber }}–{{ lastEmployeeNumber }} of
-      {{ totalEmployees }} employees
+      Showing {{ firstEmployeeNumber }}–{{ lastEmployeeNumber }} of {{ totalEmployees }} employees
     </span>
 
     <div class="pagination-controls">
@@ -75,9 +75,7 @@
       >
         Previous
       </button>
-      <span class="page-indicator">
-        Page {{ currentPage }} of {{ totalPages }}
-      </span>
+      <span class="page-indicator"> Page {{ currentPage }} of {{ totalPages }} </span>
       <button
         type="button"
         class="pagination-button"
@@ -89,10 +87,8 @@
     </div>
   </nav>
 
-
   <!-- Add / Edit Employee Modal -->
   @if (isEmployeeFormModalOpen) {
-
     <app-modal
       [title]="isEditingEmployee ? 'Edit Employee' : 'Add Employee'"
       [description]="
@@ -102,40 +98,31 @@
       "
       (close)="closeEmployeeFormModal()"
     >
-
       <app-employee-form
         [employee]="employeeBeingEdited"
         [isEditMode]="isEditingEmployee"
         (save)="saveEmployee($event)"
         (cancel)="closeEmployeeFormModal()"
       ></app-employee-form>
-
     </app-modal>
-
   }
-
 
   <!-- Delete Confirmation Modal -->
   @if (isDeleteConfirmationModalOpen) {
-
     <app-modal
       title="Delete Employee"
       [description]="
-        'Are you sure you want to delete ' +
-        employeePendingDeletion?.employeeName +
-        '\'s data?'
+        'Are you sure you want to delete ' + employeePendingDeletion?.employeeName + '\'s data?'
       "
       (close)="closeDeleteConfirmationModal()"
     >
-
       <div class="form-actions">
-
         <app-button
           [button]="{
             label: 'Cancel',
             type: 'button',
             disabled: false,
-            className: 'cancel-btn'
+            className: 'cancel-btn',
           }"
           (clicked)="closeDeleteConfirmationModal()"
         ></app-button>
@@ -145,15 +132,11 @@
             label: 'Delete',
             type: 'button',
             disabled: false,
-            className: 'delete-confirm-btn'
+            className: 'delete-confirm-btn',
           }"
           (clicked)="confirmEmployeeDelete()"
         ></app-button>
-
       </div>
-
     </app-modal>
-
   }
-
 </section>

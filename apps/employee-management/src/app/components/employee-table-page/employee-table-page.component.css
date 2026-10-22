@@ -1,4 +1,3 @@
-
 .employee-page {
   display: flex;
   width: 100%;
@@ -20,6 +19,39 @@ app-custom-table {
   display: block;
   min-height: 0;
   flex: 1;
+}
+
+.table-loading {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 4px solid var(--border);
+  border-top-color: var(--accent, #3b82f6);
+  border-radius: 50%;
+  animation: loading-spin 0.8s linear infinite;
+}
+
+@keyframes loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner {
+    animation-duration: 2s;
+  }
 }
 
 .pagination {
@@ -59,7 +91,6 @@ app-custom-table {
   color: var(--danger, #b42318);
 }
 
-
 /* =========================
    HEADER
 ========================= */
@@ -77,7 +108,6 @@ app-custom-table {
   border-bottom: 1px solid var(--border);
 }
 
-
 .page-title-icon {
   display: block;
 
@@ -86,7 +116,6 @@ app-custom-table {
 
   color: var(--text-muted);
 }
-
 
 .header-actions {
   display: flex;
@@ -97,7 +126,6 @@ app-custom-table {
 
   gap: 12px;
 }
-
 
 /* =========================
    EXISTING TABLE INFO
@@ -117,11 +145,9 @@ app-custom-table {
   font-size: 13px;
 }
 
-
 .employeeCount {
   padding-left: 0;
 }
-
 
 /* =========================
    MODAL ACTIONS
@@ -135,13 +161,11 @@ app-custom-table {
   gap: 10px;
 }
 
-
 /* =========================
    RESPONSIVE
 ========================= */
 
 @media (max-width: 950px) {
-
   .page-header {
     align-items: flex-start;
 
@@ -157,9 +181,7 @@ app-custom-table {
   }
 }
 
-
 @media (max-width: 650px) {
-
   .header-actions {
     flex-direction: column;
 

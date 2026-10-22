@@ -60,7 +60,7 @@ export class MockApiService {
             total: matchingEmployees.length,
           });
           subscriber.complete();
-        }, 100);
+        }, 300);
       };
 
       const storedEmployees = this.employeeService.getStoredEmployees();
